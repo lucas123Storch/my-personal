@@ -28,8 +28,12 @@ export default function Login() {
       } else {
         setError("Permissões insuficientes.");
       }
-    } catch (err: any) {
-      setError("Erro ao fazer login: " + err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError("Erro ao fazer login: " + err.message);
+      } else {
+        setError("Erro desconhecido ao fazer login.");
+      }
     }
   };
 

@@ -44,8 +44,12 @@ export default function Signup() {
       });
 
       router.push("/auth/login");
-    } catch (err: any) {
-      setError("Erro ao criar conta: " + err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError("Erro ao criar conta: " + err.message);
+      } else {
+        setError("Erro desconhecido ao criar conta.");
+      }
     }
   };
 
